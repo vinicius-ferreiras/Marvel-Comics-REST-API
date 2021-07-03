@@ -1,5 +1,8 @@
 package com.marvel.comics.dto;
 
+import com.marvel.comics.model.Comics;
+import org.springframework.data.domain.Page;
+
 import java.math.BigDecimal;
 
 public class ComicsDto {
@@ -21,6 +24,15 @@ public class ComicsDto {
         this.autores = autores;
         this.isbn = isbn;
         this.descricao = descricao;
+    }
+
+    public ComicsDto(Comics comics) {
+        this.comicId = comics.getComicId();
+        this.titulo = comics.getTitulo();
+        this.preco = comics.getPreco();
+        this.autores = comics.getAutores();
+        this.isbn = comics.getIsbn();
+        this.descricao = comics.getDescricao();
     }
 
     public Long getComicId() {
@@ -45,5 +57,9 @@ public class ComicsDto {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public static Page<ComicsDto> converter(Page<Comics> comics){
+        return comics.map(ComicsDto::new);
     }
 }

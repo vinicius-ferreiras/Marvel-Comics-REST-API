@@ -1,11 +1,9 @@
 package com.marvel.comics.dto;
 
-import com.marvel.comics.model.Comics;
 import com.marvel.comics.model.Usuario;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class UsuarioDto {
 
@@ -14,18 +12,16 @@ public class UsuarioDto {
     private String email;
     private String cpf;
     private LocalDate dataNascimento;
-    private List<Comics> comicsUsuario;
 
     public UsuarioDto() {
     }
 
-    public UsuarioDto(Long id, String nome, String email, String cpf, LocalDate dataNascimento, List<Comics> comicsUsuario) {
+    public UsuarioDto(Long id, String nome, String email, String cpf, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.comicsUsuario = comicsUsuario;
     }
 
     public UsuarioDto(Usuario usuario){
@@ -33,7 +29,7 @@ public class UsuarioDto {
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.cpf = usuario.getCpf();
-        this.comicsUsuario = usuario.getComicsUsuario();
+        this.dataNascimento = usuario.getDataNascimento();
     }
 
     public Long getId() {
@@ -54,10 +50,6 @@ public class UsuarioDto {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
-    }
-
-    public List<Comics> getComicsUsuario() {
-        return comicsUsuario;
     }
 
     public static Page<UsuarioDto> converter(Page<Usuario> usuarios){

@@ -1,5 +1,7 @@
 package com.marvel.comics.model;
 
+import com.marvel.comics.form.ComicsForm;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -30,6 +32,14 @@ public class Comics {
         this.autores = autores;
         this.isbn = isbn;
         this.descricao = descricao;
+    }
+
+    public Comics(ComicsForm comicsForm) {
+        this.titulo = comicsForm.getTitulo();
+        this.preco = comicsForm.getPreco();
+        this.autores = comicsForm.getAutores();
+        this.isbn = comicsForm.getIsbn();
+        this.descricao = comicsForm.getDescricao();
     }
 
     public Long getComicId() {

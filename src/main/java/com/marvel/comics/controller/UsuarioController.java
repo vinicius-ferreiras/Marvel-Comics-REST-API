@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -33,19 +34,22 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody @Valid UsuarioForm usuarioForm, UriComponentsBuilder uriComponentsBuilder){
+    @Transactional
+    public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody @Valid UsuarioForm usuarioForm, UriComponentsBuilder builder){
         Usuario usuario = usuarioService.cadastrarUsuario(usuarioForm);
-        URI uri = uriComponentsBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+        URI uri = builder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(usuario);
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody @Valid UsuarioForm usuarioForm){
         Usuario usuario = usuarioService.atualizarUsuario(id, usuarioForm);
         return ResponseEntity.ok().body(usuario);
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Usuario> deletarUsuario(@PathVariable Long id){
         usuarioService.deletarUsuario(id);
         return ResponseEntity.ok().build();
