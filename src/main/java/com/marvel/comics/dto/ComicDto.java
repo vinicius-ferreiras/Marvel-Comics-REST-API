@@ -28,11 +28,11 @@ public class ComicDto {
 
     public ComicDto(Comic comics) {
         this.comicId = comics.getId();
-        this.titulo = comics.getTitulo();
-        this.preco = comics.getPreco();
-        this.autores = comics.getAutores();
+        this.titulo = comics.getTitle();
+        this.preco = comics.getPrice();
+        this.autores = comics.getCreators();
         this.isbn = comics.getIsbn();
-        this.descricao = comics.getDescricao();
+        this.descricao = comics.getDescription();
     }
 
     public Long getComicId() {

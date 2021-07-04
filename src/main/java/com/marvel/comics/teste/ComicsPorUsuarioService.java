@@ -1,5 +1,6 @@
 package com.marvel.comics.teste;
 
+import com.marvel.comics.service.ComicService;
 import com.marvel.comics.teste.UsuarioComics;
 import com.marvel.comics.exception.UsuarioNotFoundException;
 import com.marvel.comics.model.Usuario;
@@ -12,6 +13,10 @@ import java.util.Optional;
 public class ComicsPorUsuarioService {
 
     private UsuarioRepository usuarioRepository;
+
+    public ComicsPorUsuarioService(UsuarioRepository usuarioRepository){
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public UsuarioComics listarComicsPorUsuario(Long id){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);

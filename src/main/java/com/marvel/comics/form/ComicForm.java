@@ -46,11 +46,11 @@ public class ComicForm {
 
     public Comic atualizar(Long id, ComicRepository comicRepository){
         Comic comics = comicRepository.getById(id);
-        comics.setTitulo(this.titulo);
-        comics.setPreco(this.preco);
-        comics.setAutores(this.autores);
+        comics.setTitle(this.titulo);
+        comics.setPrice(this.preco);
+        comics.setCreators(this.autores);
         comics.setIsbn(this.isbn);
-        comics.setDescricao(this.descricao);
+        comics.setDescription(this.descricao);
         return comics;
     }
 }

@@ -13,33 +13,33 @@ public class Comic {
     @Column(name = "id")
     private Long id;
     @Column(name = "titulo")
-    private String titulo;
+    private String title;
     @Column(name = "preco")
-    private BigDecimal preco;
+    private BigDecimal price;
     @Column(name = "autores")
-    private String autores;
+    private String creators;
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "descricao")
-    private String descricao;
+    private String description;
 
     public Comic() {
     }
 
-    public Comic(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
-        this.titulo = titulo;
-        this.preco = preco;
-        this.autores = autores;
+    public Comic(String title, BigDecimal price, String creators, String isbn, String description) {
+        this.title = title;
+        this.price = price;
+        this.creators = creators;
         this.isbn = isbn;
-        this.descricao = descricao;
+        this.description = description;
     }
 
     public Comic(ComicForm comicForm) {
-        this.titulo = comicForm.getTitulo();
-        this.preco = comicForm.getPreco();
-        this.autores = comicForm.getAutores();
+        this.title = comicForm.getTitulo();
+        this.price = comicForm.getPreco();
+        this.creators = comicForm.getAutores();
         this.isbn = comicForm.getIsbn();
-        this.descricao = comicForm.getDescricao();
+        this.description = comicForm.getDescricao();
     }
 
     public Long getId() {
@@ -50,28 +50,28 @@ public class Comic {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public BigDecimal getPreco() {
-        return preco;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public String getAutores() {
-        return autores;
+    public String getCreators() {
+        return creators;
     }
 
-    public void setAutores(String autores) {
-        this.autores = autores;
+    public void setCreators(String creators) {
+        this.creators = creators;
     }
 
     public String getIsbn() {
@@ -82,12 +82,12 @@ public class Comic {
         this.isbn = isbn;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -98,21 +98,21 @@ public class Comic {
         Comic comics = (Comic) o;
 
         if (!id.equals(comics.id)) return false;
-        if (!titulo.equals(comics.titulo)) return false;
-        if (!preco.equals(comics.preco)) return false;
-        if (!autores.equals(comics.autores)) return false;
+        if (!title.equals(comics.title)) return false;
+        if (!price.equals(comics.price)) return false;
+        if (!creators.equals(comics.creators)) return false;
         if (!isbn.equals(comics.isbn)) return false;
-        return descricao.equals(comics.descricao);
+        return description.equals(comics.description);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + titulo.hashCode();
-        result = 31 * result + preco.hashCode();
-        result = 31 * result + autores.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + price.hashCode();
+        result = 31 * result + creators.hashCode();
         result = 31 * result + isbn.hashCode();
-        result = 31 * result + descricao.hashCode();
+        result = 31 * result + description.hashCode();
         return result;
     }
 
@@ -120,11 +120,11 @@ public class Comic {
     public String toString() {
         return "Comics{" +
                 "comicId=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", preco=" + preco +
-                ", autores='" + autores + '\'' +
+                ", titulo='" + title + '\'' +
+                ", preco=" + price +
+                ", autores='" + creators + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", descricao='" + descricao + '\'' +
+                ", descricao='" + description + '\'' +
                 '}';
     }
 }
