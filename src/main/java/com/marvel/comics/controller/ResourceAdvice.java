@@ -1,6 +1,6 @@
 package com.marvel.comics.controller;
 
-import com.marvel.comics.exception.ComicsNotFoundException;
+import com.marvel.comics.exception.ComicNotFoundException;
 import com.marvel.comics.exception.UsuarioNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ResourceAdvice {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({UsuarioNotFoundException.class, ComicsNotFoundException.class})
+    @ExceptionHandler({UsuarioNotFoundException.class, ComicNotFoundException.class})
     public void notFound(){
     }
 }

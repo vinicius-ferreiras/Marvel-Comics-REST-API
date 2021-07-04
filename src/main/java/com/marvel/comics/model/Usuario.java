@@ -23,7 +23,7 @@ public class Usuario {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Comics> comicsUsuario;
+    private List<Comic> comicsUsuario;
 
     public Usuario() {
     }
@@ -78,11 +78,11 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public List<Comics> getComicsUsuario() {
+    public List<Comic> getComicsUsuario() {
         return comicsUsuario;
     }
 
-    public void setComicsUsuario(List<Comics> comicsUsuario) {
+    public void setComicsUsuario(List<Comic> comicsUsuario) {
         this.comicsUsuario = comicsUsuario;
     }
 

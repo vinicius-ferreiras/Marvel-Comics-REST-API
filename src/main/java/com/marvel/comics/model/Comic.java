@@ -1,17 +1,17 @@
 package com.marvel.comics.model;
 
-import com.marvel.comics.form.ComicsForm;
+import com.marvel.comics.form.ComicForm;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "comics")
-public class Comics {
+public class Comic {
 
     @Id
-    @Column(name = "comic_id")
-    private Long comicId;
+    @Column(name = "id")
+    private Long id;
     @Column(name = "titulo")
     private String titulo;
     @Column(name = "preco")
@@ -23,10 +23,10 @@ public class Comics {
     @Column(name = "descricao")
     private String descricao;
 
-    public Comics() {
+    public Comic() {
     }
 
-    public Comics(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+    public Comic(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
         this.titulo = titulo;
         this.preco = preco;
         this.autores = autores;
@@ -34,20 +34,20 @@ public class Comics {
         this.descricao = descricao;
     }
 
-    public Comics(ComicsForm comicsForm) {
-        this.titulo = comicsForm.getTitulo();
-        this.preco = comicsForm.getPreco();
-        this.autores = comicsForm.getAutores();
-        this.isbn = comicsForm.getIsbn();
-        this.descricao = comicsForm.getDescricao();
+    public Comic(ComicForm comicForm) {
+        this.titulo = comicForm.getTitulo();
+        this.preco = comicForm.getPreco();
+        this.autores = comicForm.getAutores();
+        this.isbn = comicForm.getIsbn();
+        this.descricao = comicForm.getDescricao();
     }
 
-    public Long getComicId() {
-        return comicId;
+    public Long getId() {
+        return id;
     }
 
-    public void setComicId(Long comicId) {
-        this.comicId = comicId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -95,9 +95,9 @@ public class Comics {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Comics comics = (Comics) o;
+        Comic comics = (Comic) o;
 
-        if (!comicId.equals(comics.comicId)) return false;
+        if (!id.equals(comics.id)) return false;
         if (!titulo.equals(comics.titulo)) return false;
         if (!preco.equals(comics.preco)) return false;
         if (!autores.equals(comics.autores)) return false;
@@ -107,7 +107,7 @@ public class Comics {
 
     @Override
     public int hashCode() {
-        int result = comicId.hashCode();
+        int result = id.hashCode();
         result = 31 * result + titulo.hashCode();
         result = 31 * result + preco.hashCode();
         result = 31 * result + autores.hashCode();
@@ -119,7 +119,7 @@ public class Comics {
     @Override
     public String toString() {
         return "Comics{" +
-                "comicId=" + comicId +
+                "comicId=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", preco=" + preco +
                 ", autores='" + autores + '\'' +

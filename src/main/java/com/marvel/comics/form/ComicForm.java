@@ -1,11 +1,11 @@
 package com.marvel.comics.form;
 
-import com.marvel.comics.model.Comics;
-import com.marvel.comics.repository.ComicsRepository;
+import com.marvel.comics.model.Comic;
+import com.marvel.comics.repository.ComicRepository;
 
 import java.math.BigDecimal;
 
-public class ComicsForm {
+public class ComicForm {
 
     private String titulo;
     private BigDecimal preco;
@@ -13,10 +13,10 @@ public class ComicsForm {
     private String isbn;
     private String descricao;
 
-    public ComicsForm() {
+    public ComicForm() {
     }
 
-    public ComicsForm(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+    public ComicForm(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
         this.titulo = titulo;
         this.preco = preco;
         this.autores = autores;
@@ -44,8 +44,8 @@ public class ComicsForm {
         return descricao;
     }
 
-    public Comics atualizar(Long id, ComicsRepository comicsRepository){
-        Comics comics = comicsRepository.getById(id);
+    public Comic atualizar(Long id, ComicRepository comicRepository){
+        Comic comics = comicRepository.getById(id);
         comics.setTitulo(this.titulo);
         comics.setPreco(this.preco);
         comics.setAutores(this.autores);
