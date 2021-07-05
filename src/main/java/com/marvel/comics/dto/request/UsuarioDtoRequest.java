@@ -1,21 +1,21 @@
-package com.marvel.comics.form;
+package com.marvel.comics.dto.request;
 
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
 
 import java.time.LocalDate;
 
-public class UsuarioForm {
+public class UsuarioDtoRequest {
 
     private String nome;
     private String email;
     private String cpf;
     private LocalDate dataNascimento;
 
-    public UsuarioForm() {
+    public UsuarioDtoRequest() {
     }
 
-    public UsuarioForm(String nome, String email, String cpf, LocalDate dataNascimento) {
+    public UsuarioDtoRequest(String nome, String email, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;

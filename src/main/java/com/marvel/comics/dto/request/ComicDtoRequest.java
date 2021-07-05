@@ -1,11 +1,12 @@
-package com.marvel.comics.form;
+package com.marvel.comics.dto.request;
 
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.repository.ComicRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-public class ComicForm {
+public class ComicDtoRequest {
 
     private String titulo;
     private BigDecimal preco;
@@ -13,10 +14,10 @@ public class ComicForm {
     private String isbn;
     private String descricao;
 
-    public ComicForm() {
+    public ComicDtoRequest() {
     }
 
-    public ComicForm(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+    public ComicDtoRequest(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
         this.titulo = titulo;
         this.preco = preco;
         this.autores = autores;
@@ -46,11 +47,11 @@ public class ComicForm {
 
     public Comic atualizar(Long id, ComicRepository comicRepository){
         Comic comics = comicRepository.getById(id);
-        comics.setTitle(this.titulo);
-        comics.setPrice(this.preco);
-        comics.setCreators(this.autores);
+        comics.setTitulo(this.titulo);
+        comics.setPreco(this.preco);
+        comics.setAutores(this.autores);
         comics.setIsbn(this.isbn);
-        comics.setDescription(this.descricao);
+        comics.setDescricao(this.descricao);
         return comics;
     }
 }

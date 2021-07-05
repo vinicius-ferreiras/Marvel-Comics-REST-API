@@ -1,6 +1,7 @@
-package com.marvel.comics.teste;
+package com.marvel.comics.controller;
 
-import com.marvel.comics.model.Comic;
+import com.marvel.comics.model.Usuario;
+import com.marvel.comics.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/client")
-public class ComicRestService {
+@RequestMapping("/listar")
+public class ComicsPorUsuarioController {
 
     @Autowired
-    private ComicClient comicClient;
+    private UsuarioService usuarioService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Comic> buscarComics(@PathVariable Long id){
-        Comic comics = comicClient.buscaComicsPorId(id);
-        return comics != null ? ResponseEntity.ok().body(comics) : ResponseEntity.notFound().build();
+    public ResponseEntity<Usuario> listarUsuarioPorId(@PathVariable Long id){
+        Usuario usuario = usuarioService.listarUsuarioPorId(id);
+        return ResponseEntity.ok(usuario);
     }
 }

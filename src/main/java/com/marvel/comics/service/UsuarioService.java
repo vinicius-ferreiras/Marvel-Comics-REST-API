@@ -1,8 +1,8 @@
 package com.marvel.comics.service;
 
-import com.marvel.comics.dto.UsuarioDto;
+import com.marvel.comics.dto.response.UsuarioDtoResponse;
 import com.marvel.comics.exception.UsuarioNotFoundException;
-import com.marvel.comics.form.UsuarioForm;
+import com.marvel.comics.dto.request.UsuarioDtoRequest;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +22,30 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public UsuarioDto listarUsuarioPorId(Long id){
+    public Usuario listarUsuarioPorId(Long id){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
-            return new UsuarioDto(usuarioOptional.get());
+            return usuarioOptional.get();
         } else {
             throw new UsuarioNotFoundException("Usuario não encontrado");
         }
     }
 
-    public Page<UsuarioDto> listarTodosUsuarios(Pageable pageable){
+    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
         Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
-        return UsuarioDto.converter(usuarios);
+        return UsuarioDtoResponse.converter(usuarios);
     }
 
-    public Usuario cadastrarUsuario(UsuarioForm usuarioForm){
-        Usuario usuario = new Usuario(usuarioForm);
+    public Usuario cadastrarUsuario(UsuarioDtoRequest usuarioDtoRequest){
+        Usuario usuario = new Usuario(usuarioDtoRequest);
         usuarioRepository.save(usuario);
         return usuario;
     }
 
-    public Usuario atualizarUsuario(Long id, UsuarioForm usuarioForm){
+    public Usuario atualizarUsuario(Long id, UsuarioDtoRequest usuarioDtoRequest){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
-            return usuarioForm.atualizar(id, usuarioRepository);
+            return usuarioDtoRequest.atualizar(id, usuarioRepository);
         } else {
             throw new UsuarioNotFoundException("Usuario não encontrado");
         }

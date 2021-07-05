@@ -1,45 +1,57 @@
 package com.marvel.comics.model;
 
-import com.marvel.comics.form.ComicForm;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.marvel.comics.dto.request.ComicDtoRequest;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "comics")
-public class Comic {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Comic implements Serializable {
 
     @Id
     @Column(name = "id")
+    @JsonProperty("id")
     private Long id;
     @Column(name = "titulo")
-    private String title;
+    @JsonProperty("title")
+    private String titulo;
     @Column(name = "preco")
-    private BigDecimal price;
+    @JsonProperty("price")
+    private BigDecimal preco;
     @Column(name = "autores")
-    private String creators;
+    @JsonProperty("creators")
+    private String autores;
     @Column(name = "isbn")
+    @JsonProperty("isbn")
     private String isbn;
     @Column(name = "descricao")
-    private String description;
+    @JsonProperty("description")
+    private String descricao;
 
     public Comic() {
     }
 
-    public Comic(String title, BigDecimal price, String creators, String isbn, String description) {
-        this.title = title;
-        this.price = price;
-        this.creators = creators;
+    public Comic(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+        this.titulo = titulo;
+        this.preco = preco;
+        this.autores = autores;
         this.isbn = isbn;
-        this.description = description;
+        this.descricao = descricao;
     }
 
-    public Comic(ComicForm comicForm) {
-        this.title = comicForm.getTitulo();
-        this.price = comicForm.getPreco();
-        this.creators = comicForm.getAutores();
-        this.isbn = comicForm.getIsbn();
-        this.description = comicForm.getDescricao();
+    public Comic(ComicDtoRequest comicDtoRequest) {
+        this.titulo = comicDtoRequest.getTitulo();
+        this.preco = comicDtoRequest.getPreco();
+        this.autores = comicDtoRequest.getAutores();
+        this.isbn = comicDtoRequest.getIsbn();
+        this.descricao = comicDtoRequest.getDescricao();
     }
 
     public Long getId() {
@@ -50,28 +62,28 @@ public class Comic {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
-    public String getCreators() {
-        return creators;
+    public String getAutores() {
+        return autores;
     }
 
-    public void setCreators(String creators) {
-        this.creators = creators;
+    public void setAutores(String autores) {
+        this.autores = autores;
     }
 
     public String getIsbn() {
@@ -82,12 +94,12 @@ public class Comic {
         this.isbn = isbn;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @Override
@@ -98,21 +110,21 @@ public class Comic {
         Comic comics = (Comic) o;
 
         if (!id.equals(comics.id)) return false;
-        if (!title.equals(comics.title)) return false;
-        if (!price.equals(comics.price)) return false;
-        if (!creators.equals(comics.creators)) return false;
+        if (!titulo.equals(comics.titulo)) return false;
+        if (!preco.equals(comics.preco)) return false;
+        if (!autores.equals(comics.autores)) return false;
         if (!isbn.equals(comics.isbn)) return false;
-        return description.equals(comics.description);
+        return descricao.equals(comics.descricao);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + price.hashCode();
-        result = 31 * result + creators.hashCode();
+        result = 31 * result + titulo.hashCode();
+        result = 31 * result + preco.hashCode();
+        result = 31 * result + autores.hashCode();
         result = 31 * result + isbn.hashCode();
-        result = 31 * result + description.hashCode();
+        result = 31 * result + descricao.hashCode();
         return result;
     }
 
@@ -120,11 +132,11 @@ public class Comic {
     public String toString() {
         return "Comics{" +
                 "comicId=" + id +
-                ", titulo='" + title + '\'' +
-                ", preco=" + price +
-                ", autores='" + creators + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", preco=" + preco +
+                ", autores='" + autores + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", descricao='" + description + '\'' +
+                ", descricao='" + descricao + '\'' +
                 '}';
     }
 }

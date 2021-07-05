@@ -1,7 +1,9 @@
 package com.marvel.comics.controller;
 
-import com.marvel.comics.dto.ComicDto;
-import com.marvel.comics.form.ComicForm;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.marvel.comics.dto.response.ComicDtoResponse;
+import com.marvel.comics.dto.request.ComicDtoRequest;
+import com.marvel.comics.retorno.Retorno;
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.service.ComicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,28 +25,29 @@ public class ComicController {
     private ComicService comicService;
 
     @GetMapping
-    public Page<ComicDto> listarTodosComics(Pageable pageable){
+    public Page<ComicDtoResponse> listarTodosComics(Pageable pageable){
         return comicService.listarTodosComics(pageable);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ComicDto> listarComicsPorId(@PathVariable Long id){
-        ComicDto comicDto = comicService.listarComicsPorId(id);
-        return ResponseEntity.ok(comicDto);
+    public ComicDtoResponse listarComicsPorId(@PathVariable Long id) throws JsonProcessingException {
+        ComicDtoResponse comic = comicService.getComicsPorId(id);
+        return comic;
+
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Comic> cadastrarComics(@RequestBody @Valid ComicForm comicForm, UriComponentsBuilder builder){
-       Comic comics = comicService.cadastarComics(comicForm);
+    public ResponseEntity<Comic> cadastrarComics(@RequestBody @Valid ComicDtoRequest comicDtoRequest, UriComponentsBuilder builder){
+       Comic comics = comicService.cadastarComics(comicDtoRequest);
         URI uri = builder.path("/comics/{id}").buildAndExpand(comics.getId()).toUri();
         return ResponseEntity.created(uri).body(comics);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Comic> atualizarComics(@PathVariable Long id, @RequestBody @Valid ComicForm comicForm){
-        Comic comics = comicService.atualizarComics(id, comicForm);
+    public ResponseEntity<Comic> atualizarComics(@PathVariable Long id, @RequestBody @Valid ComicDtoRequest comicDtoRequest){
+        Comic comics = comicService.atualizarComics(id, comicDtoRequest);
         return ResponseEntity.ok().body(comics);
     }
 

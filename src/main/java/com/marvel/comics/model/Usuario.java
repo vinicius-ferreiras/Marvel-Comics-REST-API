@@ -1,6 +1,6 @@
 package com.marvel.comics.model;
 
-import com.marvel.comics.form.UsuarioForm;
+import com.marvel.comics.dto.request.UsuarioDtoRequest;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -35,11 +35,11 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public Usuario(UsuarioForm usuarioForm) {
-        this.nome = usuarioForm.getNome();
-        this.email = usuarioForm.getEmail();
-        this.cpf = usuarioForm.getCpf();
-        this.dataNascimento = usuarioForm.getDataNascimento();
+    public Usuario(UsuarioDtoRequest usuarioDtoRequest) {
+        this.nome = usuarioDtoRequest.getNome();
+        this.email = usuarioDtoRequest.getEmail();
+        this.cpf = usuarioDtoRequest.getCpf();
+        this.dataNascimento = usuarioDtoRequest.getDataNascimento();
     }
 
     public Long getId() {

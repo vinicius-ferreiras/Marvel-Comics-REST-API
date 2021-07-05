@@ -1,34 +1,31 @@
-package com.marvel.comics.dto;
+package com.marvel.comics.dto.response;
 
 import com.marvel.comics.model.Usuario;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 
-public class UsuarioDto {
+public class UsuarioDtoResponse {
 
     private Long id;
     private String nome;
     private String email;
-    private String cpf;
     private LocalDate dataNascimento;
 
-    public UsuarioDto() {
+    public UsuarioDtoResponse() {
     }
 
-    public UsuarioDto(Long id, String nome, String email, String cpf, LocalDate dataNascimento) {
+    public UsuarioDtoResponse(Long id, String nome, String email, LocalDate dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
-        this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
 
-    public UsuarioDto(Usuario usuario){
+    public UsuarioDtoResponse(Usuario usuario){
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
-        this.cpf = usuario.getCpf();
         this.dataNascimento = usuario.getDataNascimento();
     }
 
@@ -44,15 +41,11 @@ public class UsuarioDto {
         return email;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public static Page<UsuarioDto> converter(Page<Usuario> usuarios){
-        return usuarios.map(UsuarioDto::new);
+    public static Page<UsuarioDtoResponse> converter(Page<Usuario> usuarios){
+        return usuarios.map(UsuarioDtoResponse::new);
     }
 }
