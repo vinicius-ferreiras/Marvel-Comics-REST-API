@@ -82,8 +82,8 @@ public class Usuario {
         return comicsUsuario;
     }
 
-    public void setComicsUsuario(List<Comic> comicsUsuario) {
-        this.comicsUsuario = comicsUsuario;
+    public void setComicsUsuario(Comic comic) {
+        comicsUsuario.add(comic);
     }
 
     @Override

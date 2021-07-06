@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface MarvelService {
 
     @RequestMapping(method = RequestMethod.GET, value = "/v1/public/comics/{id}?ts=1&apikey=beaa15ea2f2b961768401045257ed245&hash=a0fc033f3955578644ebbbd1671b1ce7")
-    public Retorno getComicsPorId(@PathVariable("id") Long id);
+    public Retorno getComicsPorId(@PathVariable("id") Long comicId);
 }

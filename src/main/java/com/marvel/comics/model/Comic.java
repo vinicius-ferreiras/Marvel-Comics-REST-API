@@ -3,6 +3,7 @@ package com.marvel.comics.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marvel.comics.dto.request.ComicDtoRequest;
+import com.marvel.comics.dto.response.ComicDtoResponse;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -52,6 +53,15 @@ public class Comic implements Serializable {
         this.autores = comicDtoRequest.getAutores();
         this.isbn = comicDtoRequest.getIsbn();
         this.descricao = comicDtoRequest.getDescricao();
+    }
+
+    public Comic(ComicDtoResponse comicDtoResponse) {
+        this.id = comicDtoResponse.getComicId();
+        this.titulo = comicDtoResponse.getTitulo();
+        this.preco = comicDtoResponse.getPreco();
+        this.autores = comicDtoResponse.getAutores();
+        this.isbn = comicDtoResponse.getIsbn();
+        this.descricao = comicDtoResponse.getDescricao();
     }
 
     public Long getId() {

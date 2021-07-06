@@ -30,18 +30,16 @@ public class ComicController {
     }
 
     @GetMapping("/{id}")
-    public ComicDtoResponse listarComicsPorId(@PathVariable Long id) throws JsonProcessingException {
-        ComicDtoResponse comic = comicService.getComicsPorId(id);
+    public Comic listarComicsPorId(@PathVariable Long id) throws JsonProcessingException {
+        Comic comic = comicService.getMarvelPorId(id);
         return comic;
-
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Comic> cadastrarComics(@RequestBody @Valid ComicDtoRequest comicDtoRequest, UriComponentsBuilder builder){
-       Comic comics = comicService.cadastarComics(comicDtoRequest);
-        URI uri = builder.path("/comics/{id}").buildAndExpand(comics.getId()).toUri();
-        return ResponseEntity.created(uri).body(comics);
+    public ResponseEntity<Comic> cadastrarComics(@RequestBody Long comicId, Long usuarioId) throws JsonProcessingException {
+        Comic comic = comicService.getComicsPorId(comicId, usuarioId);
+        return ResponseEntity.ok().body(comic);
     }
 
     @PutMapping("/{id}")
