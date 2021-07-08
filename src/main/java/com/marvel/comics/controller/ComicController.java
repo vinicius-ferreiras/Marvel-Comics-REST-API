@@ -3,6 +3,7 @@ package com.marvel.comics.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marvel.comics.dto.response.ComicDtoResponse;
 import com.marvel.comics.dto.request.ComicDtoRequest;
+import com.marvel.comics.model.Usuario;
 import com.marvel.comics.retorno.Retorno;
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.service.ComicService;
@@ -35,10 +36,10 @@ public class ComicController {
         return comic;
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     @Transactional
-    public ResponseEntity<Comic> cadastrarComics(@RequestBody Long comicId, Long usuarioId) throws JsonProcessingException {
-        Comic comic = comicService.getComicsPorId(comicId, usuarioId);
+    public ResponseEntity<Comic> cadastrarComics(@PathVariable Long id) throws JsonProcessingException {
+        Comic comic = comicService.getMarvelPorId(id);
         return ResponseEntity.ok().body(comic);
     }
 

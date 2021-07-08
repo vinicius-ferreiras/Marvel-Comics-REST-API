@@ -31,9 +31,9 @@ public class UsuarioService {
         }
     }
 
-    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
+    public Page<Usuario> listarTodosUsuarios(Pageable pageable){
         Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
-        return UsuarioDtoResponse.converter(usuarios);
+        return usuarios;
     }
 
     public Usuario cadastrarUsuario(UsuarioDtoRequest usuarioDtoRequest){

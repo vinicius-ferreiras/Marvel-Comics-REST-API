@@ -48,30 +48,20 @@ public class ComicService {
         return ComicDtoResponse.converter(comics);
     }
 
-    public Comic cadastarComics(ComicDtoRequest comicDtoRequest){
-        Comic comics = new Comic(comicDtoRequest);
-        comicRepository.save(comics);
-        return comics;
-    }
-
     public Comic getMarvelPorId(Long comicId) throws JsonProcessingException {
         Retorno retorno = marvelService.getComicsPorId(comicId);
         ComicDtoResponse comicDtoResponse = new ComicDtoResponse(retorno);
         Comic comic = new Comic(comicDtoResponse);
-        return comic;
-    }
-
-    private void salvarComics(Comic comic, Long usuarioId) {
         comicRepository.save(comic);
-        Usuario usuario = usuarioRepository.getById(usuarioId);
-        usuario.setComicsUsuario(comic);
-    }
-
-    public Comic getComicsPorId(Long comicId, Long usuarioId) throws JsonProcessingException {
-        Comic comic = getMarvelPorId(comicId);
-        salvarComics(comic, usuarioId);
         return comic;
     }
+
+//    public Comic getComicsPorId(Long usuarioId, Long comicId) {
+//        Comic comic = comicRepository.getById(comicId);
+//        Usuario usuario = usuarioRepository.getById(usuarioId);
+//        usuario.adicionaComic(comic);
+//        return comic;
+//    }
 
     public Comic atualizarComics(Long id, ComicDtoRequest comicDtoRequest){
         Optional<Comic> comicsOptional = comicRepository.findById(id);

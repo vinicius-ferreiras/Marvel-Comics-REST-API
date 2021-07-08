@@ -4,6 +4,7 @@ import com.marvel.comics.dto.request.UsuarioDtoRequest;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,16 +24,18 @@ public class Usuario {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Comic> comicsUsuario;
+    private List<Comic> comicsUsuario = new ArrayList<>();
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String email, String cpf, LocalDate dataNascimento) {
+    public Usuario(Long id, String nome, String email, String cpf, LocalDate dataNascimento, List<Comic> comicsUsuario) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.comicsUsuario = comicsUsuario;
     }
 
     public Usuario(UsuarioDtoRequest usuarioDtoRequest) {
@@ -82,7 +85,11 @@ public class Usuario {
         return comicsUsuario;
     }
 
-    public void setComicsUsuario(Comic comic) {
+    public void setComicsUsuario(List<Comic> comicsUsuario) {
+        this.comicsUsuario = comicsUsuario;
+    }
+
+    public void adicionaComic(Comic comic){
         comicsUsuario.add(comic);
     }
 

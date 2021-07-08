@@ -13,46 +13,32 @@ import java.util.List;
 
 @Entity
 @Table(name = "comics")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Comic implements Serializable {
 
     @Id
     @Column(name = "id")
-    @JsonProperty("id")
     private Long id;
     @Column(name = "titulo")
-    @JsonProperty("title")
     private String titulo;
     @Column(name = "preco")
-    @JsonProperty("price")
     private BigDecimal preco;
     @Column(name = "autores")
-    @JsonProperty("creators")
     private String autores;
     @Column(name = "isbn")
-    @JsonProperty("isbn")
     private String isbn;
     @Column(name = "descricao")
-    @JsonProperty("description")
     private String descricao;
 
     public Comic() {
     }
 
-    public Comic(String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+    public Comic(Long id, String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+        this.id = id;
         this.titulo = titulo;
         this.preco = preco;
         this.autores = autores;
         this.isbn = isbn;
         this.descricao = descricao;
-    }
-
-    public Comic(ComicDtoRequest comicDtoRequest) {
-        this.titulo = comicDtoRequest.getTitulo();
-        this.preco = comicDtoRequest.getPreco();
-        this.autores = comicDtoRequest.getAutores();
-        this.isbn = comicDtoRequest.getIsbn();
-        this.descricao = comicDtoRequest.getDescricao();
     }
 
     public Comic(ComicDtoResponse comicDtoResponse) {

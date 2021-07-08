@@ -23,7 +23,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
+    public Page<Usuario> listarTodosUsuarios(Pageable pageable){
         return usuarioService.listarTodosUsuarios(pageable);
     }
 
