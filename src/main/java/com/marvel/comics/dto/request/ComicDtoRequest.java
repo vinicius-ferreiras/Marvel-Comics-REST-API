@@ -1,11 +1,9 @@
 package com.marvel.comics.dto.request;
 
 import com.marvel.comics.model.Comic;
-import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.ComicRepository;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class ComicDtoRequest {
 

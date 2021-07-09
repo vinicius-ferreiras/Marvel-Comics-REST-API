@@ -1,5 +1,5 @@
 
-package com.marvel.comics.retorno;
+package com.marvel.comics.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,37 +13,50 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "resourceURI",
-    "name"
+    "type",
+    "language",
+    "text"
 })
 @Generated("jsonschema2pojo")
-public class Item__1 {
+public class TextObject {
 
-    @JsonProperty("resourceURI")
-    private String resourceURI;
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("language")
+    private String language;
+    @JsonProperty("text")
+    private String text;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("resourceURI")
-    public String getResourceURI() {
-        return resourceURI;
+    @JsonProperty("type")
+    public String getType() {
+        return type;
     }
 
-    @JsonProperty("resourceURI")
-    public void setResourceURI(String resourceURI) {
-        this.resourceURI = resourceURI;
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("language")
+    public String getLanguage() {
+        return language;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("language")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @JsonAnyGetter

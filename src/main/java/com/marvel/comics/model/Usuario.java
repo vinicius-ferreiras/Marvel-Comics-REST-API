@@ -43,6 +43,7 @@ public class Usuario {
         this.email = usuarioDtoRequest.getEmail();
         this.cpf = usuarioDtoRequest.getCpf();
         this.dataNascimento = usuarioDtoRequest.getDataNascimento();
+        this.comicsUsuario = usuarioDtoRequest.getComicsUsuario();
     }
 
     public Long getId() {
@@ -87,10 +88,6 @@ public class Usuario {
 
     public void setComicsUsuario(List<Comic> comicsUsuario) {
         this.comicsUsuario = comicsUsuario;
-    }
-
-    public void adicionaComic(Comic comic){
-        comicsUsuario.add(comic);
     }
 
     @Override

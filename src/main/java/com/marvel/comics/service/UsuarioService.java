@@ -1,8 +1,8 @@
 package com.marvel.comics.service;
 
+import com.marvel.comics.dto.request.UsuarioDtoRequest;
 import com.marvel.comics.dto.response.UsuarioDtoResponse;
 import com.marvel.comics.exception.UsuarioNotFoundException;
-import com.marvel.comics.dto.request.UsuarioDtoRequest;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class UsuarioService {
         }
     }
 
-    public Page<Usuario> listarTodosUsuarios(Pageable pageable){
+    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
         Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
-        return usuarios;
+        return UsuarioDtoResponse.converter(usuarios);
     }
 
     public Usuario cadastrarUsuario(UsuarioDtoRequest usuarioDtoRequest){

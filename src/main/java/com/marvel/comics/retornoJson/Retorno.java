@@ -1,5 +1,5 @@
 
-package com.marvel.comics.retorno;
+package com.marvel.comics.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;

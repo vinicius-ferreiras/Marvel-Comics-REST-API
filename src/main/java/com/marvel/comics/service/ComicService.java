@@ -1,16 +1,11 @@
 package com.marvel.comics.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.marvel.comics.controller.ComicController;
 import com.marvel.comics.dto.response.ComicDtoResponse;
-import com.marvel.comics.exception.UsuarioNotFoundException;
-import com.marvel.comics.model.Usuario;
-import com.marvel.comics.repository.UsuarioRepository;
-import com.marvel.comics.retorno.Retorno;
 import com.marvel.comics.exception.ComicNotFoundException;
-import com.marvel.comics.dto.request.ComicDtoRequest;
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.repository.ComicRepository;
+import com.marvel.comics.retornoJson.Retorno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,24 +19,12 @@ public class ComicService {
     @Autowired
     final ComicRepository comicRepository;
 
-    @Autowired
-    private MarvelService marvelService;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    public ComicService(ComicRepository comicRepository) {
+    public ComicService(ComicRepository comicRepository){
         this.comicRepository = comicRepository;
     }
 
-    public ComicDtoResponse listarComicsPorId(Long id){
-        Optional<Comic> comicsOptional = comicRepository.findById(id);
-        if (comicsOptional.isPresent()){
-            return new ComicDtoResponse(comicsOptional.get());
-        } else {
-            throw new ComicNotFoundException("Comics não encontrado");
-        }
-    }
+    @Autowired
+    private MarvelService marvelService;
 
     public Page<ComicDtoResponse> listarTodosComics(Pageable pageable){
         Page<Comic> comics = comicRepository.findAll(pageable);
@@ -54,22 +37,6 @@ public class ComicService {
         Comic comic = new Comic(comicDtoResponse);
         comicRepository.save(comic);
         return comic;
-    }
-
-//    public Comic getComicsPorId(Long usuarioId, Long comicId) {
-//        Comic comic = comicRepository.getById(comicId);
-//        Usuario usuario = usuarioRepository.getById(usuarioId);
-//        usuario.adicionaComic(comic);
-//        return comic;
-//    }
-
-    public Comic atualizarComics(Long id, ComicDtoRequest comicDtoRequest){
-        Optional<Comic> comicsOptional = comicRepository.findById(id);
-        if (comicsOptional.isPresent()){
-            return comicDtoRequest.atualizar(id, comicRepository);
-        } else {
-            throw new ComicNotFoundException("Comics não encontrado");
-        }
     }
 
     public void deletarComics(Long id){

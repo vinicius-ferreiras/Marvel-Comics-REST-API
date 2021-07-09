@@ -1,7 +1,7 @@
 package com.marvel.comics.controller;
 
-import com.marvel.comics.dto.response.UsuarioDtoResponse;
 import com.marvel.comics.dto.request.UsuarioDtoRequest;
+import com.marvel.comics.dto.response.UsuarioDtoResponse;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public Page<Usuario> listarTodosUsuarios(Pageable pageable){
+    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
         return usuarioService.listarTodosUsuarios(pageable);
     }
 

@@ -1,19 +1,13 @@
 package com.marvel.comics.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.marvel.comics.dto.request.ComicDtoRequest;
 import com.marvel.comics.dto.response.ComicDtoResponse;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "comics")
-public class Comic implements Serializable {
+public class Comic {
 
     @Id
     @Column(name = "id")
@@ -28,17 +22,24 @@ public class Comic implements Serializable {
     private String isbn;
     @Column(name = "descricao")
     private String descricao;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dia_desconto")
+    private DiaDesconto diaDesconto;
+    @Column(name = "desconto_ativo")
+    private Boolean descontoAtivo;
 
     public Comic() {
     }
 
-    public Comic(Long id, String titulo, BigDecimal preco, String autores, String isbn, String descricao) {
+    public Comic(Long id, String titulo, BigDecimal preco, String autores, String isbn, String descricao, DiaDesconto diaDesconto, Boolean descontoAtivo) {
         this.id = id;
         this.titulo = titulo;
         this.preco = preco;
         this.autores = autores;
         this.isbn = isbn;
         this.descricao = descricao;
+        this.diaDesconto = diaDesconto;
+        this.descontoAtivo = descontoAtivo;
     }
 
     public Comic(ComicDtoResponse comicDtoResponse) {
@@ -48,6 +49,8 @@ public class Comic implements Serializable {
         this.autores = comicDtoResponse.getAutores();
         this.isbn = comicDtoResponse.getIsbn();
         this.descricao = comicDtoResponse.getDescricao();
+        this.diaDesconto = comicDtoResponse.getDiaDesconto();
+        this.descontoAtivo = comicDtoResponse.getDescontoAtivo();
     }
 
     public Long getId() {
@@ -96,6 +99,22 @@ public class Comic implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public DiaDesconto getDiaDesconto() {
+        return diaDesconto;
+    }
+
+    public void setDiaDesconto(DiaDesconto diaDesconto) {
+        this.diaDesconto = diaDesconto;
+    }
+
+    public Boolean getDescontoAtivo() {
+        return descontoAtivo;
+    }
+
+    public void setDescontoAtivo(Boolean descontoAtivo) {
+        this.descontoAtivo = descontoAtivo;
     }
 
     @Override
