@@ -1,6 +1,6 @@
 package com.marvel.comics.model;
 
-import com.marvel.comics.dto.request.UsuarioDtoRequest;
+import com.marvel.comics.dto.UsuarioDtoPost;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,9 +17,9 @@ public class Usuario {
     private Long id;
     @Column(name = "nome")
     private String nome;
-    @Column(name = "email" ,unique = true)
+    @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "cpf",unique = true)
+    @Column(name = "cpf", unique = true)
     private String cpf;
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
@@ -29,21 +29,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String email, String cpf, LocalDate dataNascimento, List<Comic> comicsUsuario) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.comicsUsuario = comicsUsuario;
-    }
-
-    public Usuario(UsuarioDtoRequest usuarioDtoRequest) {
-        this.nome = usuarioDtoRequest.getNome();
-        this.email = usuarioDtoRequest.getEmail();
-        this.cpf = usuarioDtoRequest.getCpf();
-        this.dataNascimento = usuarioDtoRequest.getDataNascimento();
-        this.comicsUsuario = usuarioDtoRequest.getComicsUsuario();
+    public Usuario(UsuarioDtoPost usuarioDtoPost) {
+        this.nome = usuarioDtoPost.getNome();
+        this.email = usuarioDtoPost.getEmail();
+        this.cpf = usuarioDtoPost.getCpf();
+        this.dataNascimento = usuarioDtoPost.getDataNascimento();
+        this.comicsUsuario = usuarioDtoPost.getComicsUsuario();
     }
 
     public Long getId() {
@@ -54,77 +45,31 @@ public class Usuario {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public String getCpf() {
+        return cpf;
     }
 
     public List<Comic> getComicsUsuario() {
         return comicsUsuario;
     }
 
-    public void setComicsUsuario(List<Comic> comicsUsuario) {
-        this.comicsUsuario = comicsUsuario;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Usuario usuario = (Usuario) o;
-
-        if (!id.equals(usuario.id)) return false;
-        if (!nome.equals(usuario.nome)) return false;
-        if (!email.equals(usuario.email)) return false;
-        if (!cpf.equals(usuario.cpf)) return false;
-        if (!dataNascimento.equals(usuario.dataNascimento)) return false;
-        return comicsUsuario.equals(usuario.comicsUsuario);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + nome.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + cpf.hashCode();
-        result = 31 * result + dataNascimento.hashCode();
-        result = 31 * result + comicsUsuario.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", comicsUsuario=" + comicsUsuario +
-                '}';
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 }

@@ -1,11 +1,11 @@
 package com.marvel.comics.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.marvel.comics.dto.response.ComicDtoResponse;
+import com.marvel.comics.dto.ComicDto;
 import com.marvel.comics.exception.ComicNotFoundException;
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.repository.ComicRepository;
-import com.marvel.comics.retornoJson.Retorno;
+import com.marvel.comics.model.retornoJson.Retorno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,15 +26,15 @@ public class ComicService {
     @Autowired
     private MarvelService marvelService;
 
-    public Page<ComicDtoResponse> listarTodosComics(Pageable pageable){
+    public Page<ComicDto> listarTodosComics(Pageable pageable){
         Page<Comic> comics = comicRepository.findAll(pageable);
-        return ComicDtoResponse.converter(comics);
+        return ComicDto.converter(comics);
     }
 
-    public Comic getMarvelPorId(Long comicId) throws JsonProcessingException {
+    public Comic cadastrarComics(Long comicId) throws JsonProcessingException {
         Retorno retorno = marvelService.getComicsPorId(comicId);
-        ComicDtoResponse comicDtoResponse = new ComicDtoResponse(retorno);
-        Comic comic = new Comic(comicDtoResponse);
+        ComicDto comicDto = new ComicDto(retorno);
+        Comic comic = new Comic(comicDto);
         comicRepository.save(comic);
         return comic;
     }

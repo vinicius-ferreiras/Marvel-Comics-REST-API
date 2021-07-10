@@ -1,15 +1,15 @@
-package com.marvel.comics.dto.response;
+package com.marvel.comics.dto;
 
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.model.DiaDesconto;
-import com.marvel.comics.retornoJson.Retorno;
+import com.marvel.comics.model.retornoJson.Retorno;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.LocalDate;
 
-public class ComicDtoResponse {
+public class ComicDto {
 
     private Long comicId;
     private String titulo;
@@ -20,22 +20,11 @@ public class ComicDtoResponse {
     private DiaDesconto diaDesconto;
     private Boolean descontoAtivo;
 
-    public ComicDtoResponse() {
+    public ComicDto() {
     }
 
-    public ComicDtoResponse(Long comicId, String titulo, BigDecimal preco, String autores, String isbn, String descricao, DiaDesconto diaDesconto, Boolean descontoAtivo) {
-        this.comicId = comicId;
-        this.titulo = titulo;
-        this.preco = preco;
-        this.autores = autores;
-        this.isbn = isbn;
-        this.descricao = descricao;
-        this.diaDesconto = diaDesconto;
-        this.descontoAtivo = descontoAtivo;
-    }
-
-    public ComicDtoResponse(Comic comics) {
-        this.comicId = comics.getId();
+    public ComicDto(Comic comics) {
+        this.comicId = comics.getComicId();
         this.titulo = comics.getTitulo();
         this.preco = comics.getPreco();
         this.autores = comics.getAutores();
@@ -45,15 +34,15 @@ public class ComicDtoResponse {
         this.descontoAtivo = comics.getDescontoAtivo();
     }
 
-    public ComicDtoResponse(Retorno retorno) {
+    public ComicDto(Retorno retorno) {
         this.comicId = Long.valueOf(retorno.getData().getResults().getId());
         this.titulo = retorno.getData().getResults().getTitle();
         this.autores = retorno.getData().getResults().getCreators().getItems().toString();
         this.isbn = retorno.getData().getResults().getIsbn();
         this.descricao = retorno.getData().getResults().getDescription();
         this.diaDesconto = insereDiaDesconto(isbn);
-        this.descontoAtivo = insereDescontoAtivo(diaDesconto);
-        this.preco = insereDescontoNoPreco(BigDecimal.valueOf(retorno.getData().getResults().getPrices().getPrice()));
+        this.descontoAtivo = false;
+        this.preco = (BigDecimal.valueOf(retorno.getData().getResults().getPrices().getPrice()));
     }
 
     public Long getComicId() {
@@ -88,8 +77,8 @@ public class ComicDtoResponse {
         return descontoAtivo;
     }
 
-    public static Page<ComicDtoResponse> converter(Page<Comic> comics){
-        return comics.map(ComicDtoResponse::new);
+    public static Page<ComicDto> converter(Page<Comic> comics){
+        return comics.map(ComicDto::new);
     }
 
     public DiaDesconto insereDiaDesconto(String isbn){
@@ -122,7 +111,7 @@ public class ComicDtoResponse {
 
     public BigDecimal insereDescontoNoPreco(BigDecimal preco){
         if (this.descontoAtivo = true){
-            preco = (preco.multiply(new BigDecimal("0.90")).round(new MathContext(2)));
-        } return preco;
+            this.preco = (this.preco.multiply(new BigDecimal("0.90")).round(new MathContext(2)));
+        } return this.preco;
     }
 }

@@ -1,6 +1,6 @@
 package com.marvel.comics.service;
 
-import com.marvel.comics.retornoJson.Retorno;
+import com.marvel.comics.model.retornoJson.Retorno;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

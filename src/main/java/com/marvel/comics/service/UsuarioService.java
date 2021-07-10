@@ -1,7 +1,7 @@
 package com.marvel.comics.service;
 
-import com.marvel.comics.dto.request.UsuarioDtoRequest;
-import com.marvel.comics.dto.response.UsuarioDtoResponse;
+import com.marvel.comics.dto.UsuarioDtoPost;
+import com.marvel.comics.dto.UsuarioDto;
 import com.marvel.comics.exception.UsuarioNotFoundException;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
@@ -31,21 +31,21 @@ public class UsuarioService {
         }
     }
 
-    public Page<UsuarioDtoResponse> listarTodosUsuarios(Pageable pageable){
+    public Page<UsuarioDto> listarTodosUsuarios(Pageable pageable){
         Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
-        return UsuarioDtoResponse.converter(usuarios);
+        return UsuarioDto.converter(usuarios);
     }
 
-    public Usuario cadastrarUsuario(UsuarioDtoRequest usuarioDtoRequest){
-        Usuario usuario = new Usuario(usuarioDtoRequest);
+    public Usuario cadastrarUsuario(UsuarioDtoPost usuarioDtoPost){
+        Usuario usuario = new Usuario(usuarioDtoPost);
         usuarioRepository.save(usuario);
         return usuario;
     }
 
-    public Usuario atualizarUsuario(Long id, UsuarioDtoRequest usuarioDtoRequest){
+    public Usuario atualizarUsuario(Long id, UsuarioDto usuarioDto){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()){
-            return usuarioDtoRequest.atualizar(id, usuarioRepository);
+            return usuarioDto.atualizar(id, usuarioRepository);
         } else {
             throw new UsuarioNotFoundException("Usuario não encontrado");
         }

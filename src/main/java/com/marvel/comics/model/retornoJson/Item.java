@@ -1,5 +1,5 @@
 
-package com.marvel.comics.retornoJson;
+package com.marvel.comics.model.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +14,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "resourceURI",
-    "name"
+    "name",
+    "role"
 })
 @Generated("jsonschema2pojo")
-public class Series {
+public class Item {
 
     @JsonProperty("resourceURI")
     private String resourceURI;
     @JsonProperty("name")
     private String name;
+    @JsonProperty("role")
+    private String role;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -46,6 +49,16 @@ public class Series {
         this.name = name;
     }
 
+    @JsonProperty("role")
+    public String getRole() {
+        return role;
+    }
+
+    @JsonProperty("role")
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -56,4 +69,11 @@ public class Series {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }

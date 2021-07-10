@@ -1,5 +1,5 @@
 
-package com.marvel.comics.retornoJson;
+package com.marvel.comics.model.retornoJson;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +20,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "returned"
 })
 @Generated("jsonschema2pojo")
-public class Characters {
+public class Creators {
 
     @JsonProperty("available")
     private Integer available;
     @JsonProperty("collectionURI")
     private String collectionURI;
     @JsonProperty("items")
-    private List<Item__1> items = null;
+    private List<Item> items = null;
     @JsonProperty("returned")
     private Integer returned;
     @JsonIgnore
@@ -54,12 +54,12 @@ public class Characters {
     }
 
     @JsonProperty("items")
-    public List<Item__1> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
     @JsonProperty("items")
-    public void setItems(List<Item__1> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

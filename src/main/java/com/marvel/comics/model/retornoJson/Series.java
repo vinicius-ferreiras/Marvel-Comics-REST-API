@@ -1,5 +1,5 @@
 
-package com.marvel.comics.retornoJson;
+package com.marvel.comics.model.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,37 +13,37 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "path",
-    "extension"
+    "resourceURI",
+    "name"
 })
 @Generated("jsonschema2pojo")
-public class Thumbnail {
+public class Series {
 
-    @JsonProperty("path")
-    private String path;
-    @JsonProperty("extension")
-    private String extension;
+    @JsonProperty("resourceURI")
+    private String resourceURI;
+    @JsonProperty("name")
+    private String name;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("path")
-    public String getPath() {
-        return path;
+    @JsonProperty("resourceURI")
+    public String getResourceURI() {
+        return resourceURI;
     }
 
-    @JsonProperty("path")
-    public void setPath(String path) {
-        this.path = path;
+    @JsonProperty("resourceURI")
+    public void setResourceURI(String resourceURI) {
+        this.resourceURI = resourceURI;
     }
 
-    @JsonProperty("extension")
-    public String getExtension() {
-        return extension;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("extension")
-    public void setExtension(String extension) {
-        this.extension = extension;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
     }
 
     @JsonAnyGetter

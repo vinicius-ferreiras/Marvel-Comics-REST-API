@@ -1,14 +1,12 @@
-package com.marvel.comics.dto.request;
+package com.marvel.comics.dto;
 
 import com.marvel.comics.model.Comic;
-import com.marvel.comics.model.Usuario;
-import com.marvel.comics.repository.UsuarioRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDtoRequest {
+public class UsuarioDtoPost {
 
     private String nome;
     private String email;
@@ -16,10 +14,10 @@ public class UsuarioDtoRequest {
     private LocalDate dataNascimento;
     private List<Comic> comicsUsuario = new ArrayList<>();
 
-    public UsuarioDtoRequest() {
+    public UsuarioDtoPost() {
     }
 
-    public UsuarioDtoRequest(String nome, String email, String cpf, LocalDate dataNascimento, List<Comic> comicsUsuario) {
+    public UsuarioDtoPost(String nome, String email, String cpf, LocalDate dataNascimento, List<Comic> comicsUsuario) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -47,13 +45,4 @@ public class UsuarioDtoRequest {
         return comicsUsuario;
     }
 
-    public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
-        Usuario usuario = usuarioRepository.getById(id);
-        usuario.setNome(this.nome);
-        usuario.setEmail(this.email);
-        usuario.setCpf(this.cpf);
-        usuario.setDataNascimento(this.dataNascimento);
-        usuario.setComicsUsuario(this.comicsUsuario);
-        return usuario;
-    }
 }
