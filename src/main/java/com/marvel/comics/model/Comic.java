@@ -1,6 +1,6 @@
 package com.marvel.comics.model;
 
-import com.marvel.comics.dto.ComicDto;
+import com.marvel.comics.dto.retornoJson.Retorno;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,24 +22,23 @@ public class Comic {
     private String isbn;
     @Column(name = "descricao", length = 1000)
     private String descricao;
-    @Enumerated(EnumType.STRING)
     @Column(name = "dia_desconto")
-    private DiaDesconto diaDesconto;
+    private String diaDesconto;
     @Column(name = "desconto_ativo")
     private Boolean descontoAtivo;
 
     public Comic() {
     }
 
-    public Comic(ComicDto comicDto) {
-        this.comicId = comicDto.getComicId();
-        this.titulo = comicDto.getTitulo();
-        this.preco = comicDto.getPreco();
-        this.autores = comicDto.getAutores();
-        this.isbn = comicDto.getIsbn();
-        this.descricao = comicDto.getDescricao();
-        this.diaDesconto = comicDto.getDiaDesconto();
-        this.descontoAtivo = comicDto.getDescontoAtivo();
+    public Comic(Retorno retorno) {
+        this.comicId = Long.valueOf(retorno.getData().getResults().getId());
+        this.titulo = retorno.getData().getResults().getTitle();
+        this.autores = retorno.getData().getResults().getCreators().getItems().toString();
+        this.isbn = retorno.getData().getResults().getIsbn();
+        this.descricao = retorno.getData().getResults().getDescription();
+        this.diaDesconto = insereDiaDesconto(isbn);
+        this.descontoAtivo = false;
+        this.preco = (BigDecimal.valueOf(retorno.getData().getResults().getPrices().getPrice()));
     }
 
     public Long getComicId() {
@@ -66,7 +65,7 @@ public class Comic {
         return descricao;
     }
 
-    public DiaDesconto getDiaDesconto() {
+    public String getDiaDesconto() {
         return diaDesconto;
     }
 
@@ -74,4 +73,30 @@ public class Comic {
         return descontoAtivo;
     }
 
+    public void setDescontoAtivo(Boolean descontoAtivo) {
+        this.descontoAtivo = descontoAtivo;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public String insereDiaDesconto(String isbn){
+        if (!isbn.isEmpty()) {
+            if (isbn.charAt(isbn.length()-1) == '0' || isbn.charAt(isbn.length()-1) == '1') {
+                this.diaDesconto = "MONDAY";
+            } else if (isbn.charAt(isbn.length()-1) == '2' || isbn.charAt(isbn.length()-1) == '3') {
+                this.diaDesconto = "TUESDAY";
+            } else if (isbn.charAt(isbn.length()-1) == '4' || isbn.charAt(isbn.length()-1) == '5') {
+                this.diaDesconto = "WEDNESDAY";
+            } else if (isbn.charAt(isbn.length()-1) == '6' || isbn.charAt(isbn.length()-1) == '7') {
+                this.diaDesconto = "THURSDAY";
+            } else if (isbn.charAt(isbn.length()-1) == '8' || isbn.charAt(isbn.length()-1) == '9') {
+                this.diaDesconto = "FRIDAY";
+            }
+        } else {
+            this.diaDesconto = "SEM_DESCONTO";
+        }
+        return this.diaDesconto;
+    }
 }

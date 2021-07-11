@@ -1,14 +1,13 @@
 package com.marvel.comics.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.marvel.comics.dto.ComicDto;
-import com.marvel.comics.exception.ComicNotFoundException;
+import com.marvel.comics.exception.UsuarioNotFoundException;
 import com.marvel.comics.model.Comic;
+import com.marvel.comics.model.Usuario;
+import com.marvel.comics.dto.retornoJson.Retorno;
 import com.marvel.comics.repository.ComicRepository;
-import com.marvel.comics.model.retornoJson.Retorno;
+import com.marvel.comics.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,34 +16,38 @@ import java.util.Optional;
 public class ComicService {
 
     @Autowired
-    final ComicRepository comicRepository;
-
-    public ComicService(ComicRepository comicRepository){
-        this.comicRepository = comicRepository;
-    }
+    private ComicRepository comicRepository;
 
     @Autowired
     private MarvelService marvelService;
 
-    public Page<ComicDto> listarTodosComics(Pageable pageable){
-        Page<Comic> comics = comicRepository.findAll(pageable);
-        return ComicDto.converter(comics);
-    }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    public Comic cadastrarComics(Long comicId) throws JsonProcessingException {
+    public Comic listarComic(Long comicId){
         Retorno retorno = marvelService.getComicsPorId(comicId);
-        ComicDto comicDto = new ComicDto(retorno);
-        Comic comic = new Comic(comicDto);
-        comicRepository.save(comic);
-        return comic;
+        return new Comic(retorno);
     }
 
-    public void deletarComics(Long id){
-        Optional<Comic> comicsOptional = comicRepository.findById(id);
-        if (comicsOptional.isPresent()) {
-            comicRepository.deleteById(id);
+    public Comic cadastrarComics(Long comicId, Long usuarioId) throws JsonProcessingException {
+        Retorno retorno = marvelService.getComicsPorId(comicId);
+        Comic comic = new Comic(retorno);
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
+        if (usuarioOptional.isPresent()){
+            usuarioOptional.get().addComicsUsuario(comic);
+            usuarioRepository.save(usuarioOptional.get());
+            return comic;
         } else {
-            throw new ComicNotFoundException("Comics não encontrado");
+            throw new UsuarioNotFoundException("Usuario não encontrado");
         }
+
     }
+
+    public void deletarComic(Long comicId, Long usuarioId){
+        Comic comic = comicRepository.getById(comicId);
+        Usuario usuario = usuarioRepository.getById(usuarioId);
+        usuario.removeComicsUsuario(comic);
+        usuarioRepository.save(usuario);
+    }
+
 }

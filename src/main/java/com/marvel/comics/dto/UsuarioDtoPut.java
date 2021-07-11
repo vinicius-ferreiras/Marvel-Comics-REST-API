@@ -2,36 +2,28 @@ package com.marvel.comics.dto;
 
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
-import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 
-public class UsuarioDto {
+public class UsuarioDtoPut {
 
-    private Long id;
     private String nome;
     private String email;
     private LocalDate dataNascimento;
 
-    public UsuarioDto() {
+    public UsuarioDtoPut() {
     }
 
-    public UsuarioDto(Long id, String nome, String email, LocalDate dataNascimento) {
-        this.id = id;
+    public UsuarioDtoPut(String nome, String email, LocalDate dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
     }
 
-    public UsuarioDto(Usuario usuario){
-        this.id = usuario.getId();
+    public UsuarioDtoPut(Usuario usuario){
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.dataNascimento = usuario.getDataNascimento();
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getNome() {
@@ -44,10 +36,6 @@ public class UsuarioDto {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
-    }
-
-    public static Page<UsuarioDto> converter(Page<Usuario> usuarios){
-        return usuarios.map(UsuarioDto::new);
     }
 
     public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {

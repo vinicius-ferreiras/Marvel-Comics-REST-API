@@ -1,5 +1,5 @@
 
-package com.marvel.comics.model.retornoJson;
+package com.marvel.comics.dto.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +14,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "type",
-    "url"
+    "price"
 })
 @Generated("jsonschema2pojo")
-public class Url {
+public class Price {
 
     @JsonProperty("type")
     private String type;
-    @JsonProperty("url")
-    private String url;
+    @JsonProperty("price")
+    private Double price;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -36,14 +36,14 @@ public class Url {
         this.type = type;
     }
 
-    @JsonProperty("url")
-    public String getUrl() {
-        return url;
+    @JsonProperty("price")
+    public Double getPrice() {
+        return price;
     }
 
-    @JsonProperty("url")
-    public void setUrl(String url) {
-        this.url = url;
+    @JsonProperty("price")
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @JsonAnyGetter

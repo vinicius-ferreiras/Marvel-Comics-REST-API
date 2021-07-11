@@ -1,5 +1,5 @@
 
-package com.marvel.comics.model.retornoJson;
+package com.marvel.comics.dto.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,15 +14,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "type",
-    "date"
+    "language",
+    "text"
 })
 @Generated("jsonschema2pojo")
-public class Date {
+public class TextObject {
 
     @JsonProperty("type")
     private String type;
-    @JsonProperty("date")
-    private String date;
+    @JsonProperty("language")
+    private String language;
+    @JsonProperty("text")
+    private String text;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -36,14 +39,24 @@ public class Date {
         this.type = type;
     }
 
-    @JsonProperty("date")
-    public String getDate() {
-        return date;
+    @JsonProperty("language")
+    public String getLanguage() {
+        return language;
     }
 
-    @JsonProperty("date")
-    public void setDate(String date) {
-        this.date = date;
+    @JsonProperty("language")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    @JsonProperty("text")
+    public String getText() {
+        return text;
+    }
+
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @JsonAnyGetter

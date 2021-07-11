@@ -1,5 +1,5 @@
 
-package com.marvel.comics.model.retornoJson;
+package com.marvel.comics.dto.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "extension"
 })
 @Generated("jsonschema2pojo")
-public class Image {
+public class Thumbnail {
 
     @JsonProperty("path")
     private String path;

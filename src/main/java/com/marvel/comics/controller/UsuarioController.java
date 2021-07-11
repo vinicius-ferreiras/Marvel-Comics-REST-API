@@ -1,7 +1,8 @@
 package com.marvel.comics.controller;
 
+import com.marvel.comics.dto.UsuarioDtoGetAll;
 import com.marvel.comics.dto.UsuarioDtoPost;
-import com.marvel.comics.dto.UsuarioDto;
+import com.marvel.comics.dto.UsuarioDtoPut;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping
-    public Page<UsuarioDto> listarTodosUsuarios(Pageable pageable){
+    public Page<UsuarioDtoGetAll> listarTodosUsuarios(Pageable pageable){
         return usuarioService.listarTodosUsuarios(pageable);
     }
 
@@ -37,8 +38,8 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody @Valid UsuarioDto usuarioDto){
-        Usuario usuario = usuarioService.atualizarUsuario(id, usuarioDto);
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody @Valid UsuarioDtoPut usuarioDtoPut){
+        Usuario usuario = usuarioService.atualizarUsuario(id, usuarioDtoPut);
         return ResponseEntity.ok().body(usuario);
     }
 

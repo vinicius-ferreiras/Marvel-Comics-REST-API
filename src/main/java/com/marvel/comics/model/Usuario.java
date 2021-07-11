@@ -23,8 +23,8 @@ public class Usuario {
     private String cpf;
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Comic> comicsUsuario = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Comic> comics = new ArrayList<>();
 
     public Usuario() {
     }
@@ -34,7 +34,6 @@ public class Usuario {
         this.email = usuarioDtoPost.getEmail();
         this.cpf = usuarioDtoPost.getCpf();
         this.dataNascimento = usuarioDtoPost.getDataNascimento();
-        this.comicsUsuario = usuarioDtoPost.getComicsUsuario();
     }
 
     public Long getId() {
@@ -57,8 +56,8 @@ public class Usuario {
         return cpf;
     }
 
-    public List<Comic> getComicsUsuario() {
-        return comicsUsuario;
+    public List<Comic> getComics() {
+        return comics;
     }
 
     public void setNome(String nome) {
@@ -71,5 +70,13 @@ public class Usuario {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public void addComicsUsuario(Comic comic) {
+        this.comics.add(comic);
+    }
+
+    public void removeComicsUsuario(Comic comic){
+        this.comics.remove(comic);
     }
 }

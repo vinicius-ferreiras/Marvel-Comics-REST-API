@@ -1,5 +1,5 @@
 
-package com.marvel.comics.model.retornoJson;
+package com.marvel.comics.dto.retornoJson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,41 +13,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "resourceURI",
-    "name",
-    "type"
+    "type",
+    "url"
 })
 @Generated("jsonschema2pojo")
-public class Item__2 {
+public class Url {
 
-    @JsonProperty("resourceURI")
-    private String resourceURI;
-    @JsonProperty("name")
-    private String name;
     @JsonProperty("type")
     private String type;
+    @JsonProperty("url")
+    private String url;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("resourceURI")
-    public String getResourceURI() {
-        return resourceURI;
-    }
-
-    @JsonProperty("resourceURI")
-    public void setResourceURI(String resourceURI) {
-        this.resourceURI = resourceURI;
-    }
-
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @JsonProperty("type")
     public String getType() {
@@ -57,6 +34,16 @@ public class Item__2 {
     @JsonProperty("type")
     public void setType(String type) {
         this.type = type;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @JsonAnyGetter
