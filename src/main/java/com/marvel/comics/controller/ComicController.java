@@ -30,6 +30,7 @@ public class ComicController {
     }
 
     @DeleteMapping("/{comicId}")
+    @Transactional
     public ResponseEntity<Comic> removerComics(@PathVariable("comicId") Long comicId, @RequestParam(name = "usuarioId") Long usuarioId){
         comicService.deletarComic(comicId, usuarioId);
         return ResponseEntity.ok().build();

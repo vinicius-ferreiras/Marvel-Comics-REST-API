@@ -3,11 +3,18 @@ package com.marvel.comics.dto;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.repository.UsuarioRepository;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class UsuarioDtoPut {
 
+    @NotEmpty(message = "Nome deve ser preenchido")
+    @Size(min = 10, max = 100)
     private String nome;
+    @Email(message = "Insira um email válido")
+    @NotEmpty(message = "Email deve ser preenchido")
     private String email;
     private LocalDate dataNascimento;
 

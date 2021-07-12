@@ -2,6 +2,7 @@ package com.marvel.comics.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marvel.comics.exception.UsuarioNotFoundException;
+import com.marvel.comics.infrastructure.MarvelFeignClient;
 import com.marvel.comics.model.Comic;
 import com.marvel.comics.model.Usuario;
 import com.marvel.comics.dto.retornoJson.Retorno;
@@ -19,18 +20,18 @@ public class ComicService {
     private ComicRepository comicRepository;
 
     @Autowired
-    private MarvelService marvelService;
+    private MarvelFeignClient marvelFeignClient;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     public Comic listarComic(Long comicId){
-        Retorno retorno = marvelService.getComicsPorId(comicId);
+        Retorno retorno = marvelFeignClient.getComicsPorId(comicId);
         return new Comic(retorno);
     }
 
     public Comic cadastrarComics(Long comicId, Long usuarioId) throws JsonProcessingException {
-        Retorno retorno = marvelService.getComicsPorId(comicId);
+        Retorno retorno = marvelFeignClient.getComicsPorId(comicId);
         Comic comic = new Comic(retorno);
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
         if (usuarioOptional.isPresent()){

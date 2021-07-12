@@ -1,11 +1,21 @@
 package com.marvel.comics.dto;
 
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class UsuarioDtoPost {
 
+    @NotEmpty(message = "Nome deve ser preenchido")
+    @Size(min = 10, max = 100)
     private String nome;
+    @Email(message = "Insira um email válido")
+    @NotEmpty(message = "Email deve ser preenchido")
     private String email;
+    @CPF(message = "Insira um CPF válido")
     private String cpf;
     private LocalDate dataNascimento;
 
